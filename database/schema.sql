@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS alphanity
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_0900_ai_ci;
+
+USE alphanity;
+
+CREATE TABLE IF NOT EXISTS projects (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  slug VARCHAR(100) NOT NULL,
+  title VARCHAR(100) NOT NULL,
+  category VARCHAR(60) NOT NULL,
+  year VARCHAR(12) NOT NULL,
+  summary VARCHAR(260) NOT NULL,
+  cover_image VARCHAR(255) NULL,
+  outcome VARCHAR(100) NOT NULL,
+  visual ENUM('mint', 'lilac', 'peach') NOT NULL DEFAULT 'mint',
+  sort_order INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY projects_slug_unique (slug),
+  KEY projects_order_idx (sort_order, id)
+) ENGINE=InnoDB;
